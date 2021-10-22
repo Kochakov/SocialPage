@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import userPhoto from '../../assets/images/User.png'
 import styles from './users.module.css'
 import { NavLink } from 'react-router-dom'
@@ -7,6 +7,14 @@ import * as axios from 'axios'
 let Users = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    
+    const result = props.followingInProgress
+    console.log('result', result)
+   
+
+    useEffect(() => {
+        console.log('function', props.toggleFollowingProgress(true, 1))
+    }, [])
 
     let pages = [];
     for (let i = 0; i <= pagesCount; i++) {
@@ -33,7 +41,7 @@ let Users = (props) => {
                             {u.followed
                                 ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     props.toggleFollowingProgress(true, u.id)
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                         withCredentials: true,
                                         headers: {
                                             "API-KEY": "dc7c1e65-73db-466e-8f1b-a594481d251b"
@@ -51,7 +59,7 @@ let Users = (props) => {
 
                                 : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     props.toggleFollowingProgress(true, u.id)
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                         withCredentials: true,
                                         headers: {
                                             "API-KEY": "dc7c1e65-73db-466e-8f1b-a594481d251b"
@@ -68,8 +76,8 @@ let Users = (props) => {
                     </span>
                     <span>
                         <span>
-                            <div>
-                                {u.name}
+                            <div> 
+                               {u.name}
                             </div>
                             <div>
                                 {u.status}
