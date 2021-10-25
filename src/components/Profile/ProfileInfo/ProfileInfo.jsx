@@ -1,7 +1,7 @@
 import React from 'react';
-import profileReducer from '../../../redux/profile-reducer';
 import Preloader from '../../Common/Preloader/Preloader';
 import s from "./ProfileInfo.module.css"
+import ProfileStatus from "./ProfileStatus"
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -10,11 +10,12 @@ const ProfileInfo = (props) => {
   return (
     
     <div>
-      <div>
+      {/* <div>
         <img src='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' className={s.image} />
-      </div>
+      </div> */}
       <div className={s.descriptionBlock}>
       <img src={props.profile.photos.large}/>
+      <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
         <div>AboutMe: {props.profile.aboutMe}</div>
         <div>Facebook: {props.profile.contacts.facebook}</div>
         <div>VK: {props.profile.contacts.vk}</div>
