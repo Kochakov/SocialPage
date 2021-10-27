@@ -1,28 +1,25 @@
 import React from 'react';
 import Preloader from '../../Common/Preloader/Preloader';
 import s from "./ProfileInfo.module.css"
-import ProfileStatus from "./ProfileStatus"
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
-const ProfileInfo = (props) => {
-  if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}) => {
+  if (!profile) {
     return <Preloader />
   }
+  
   return (
     
     <div>
-      {/* <div>
-        <img src='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' className={s.image} />
-      </div> */}
       <div className={s.descriptionBlock}>
-      <img src={props.profile.photos.large}/>
-      <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-        <div>AboutMe: {props.profile.aboutMe}</div>
-        <div>Facebook: {props.profile.contacts.facebook}</div>
-        <div>VK: {props.profile.contacts.vk}</div>
-        <div>Twitter: {props.profile.contacts.twitter}</div>
-        <div>GitHub: {props.profile.contacts.github}</div>
-        <div>FullName: {props.profile.fullName}</div>  
+      <img src={profile.photos.large}/>
+      <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+        <div>AboutMe: {profile.aboutMe}</div>
+        <div>Facebook: {profile.contacts.facebook}</div>
+        <div>VK: {profile.contacts.vk}</div>
+        <div>Twitter: {profile.contacts.twitter}</div>
+        <div>GitHub: {profile.contacts.github}</div>
+        <div>FullName: {profile.fullName}</div>  
       </div>
     </div>
   )
